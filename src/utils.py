@@ -1,6 +1,8 @@
+#%%
 from pdfminer.high_level import extract_text
 from langchain_text_splitters import RecursiveCharacterTextSplitter
-
+from regex import regex_verificar_acoes_afirmativas
+#%%
 
 def pdf_parser(pdf_path: str) -> str:
     """ Extrai os textos do pdf, tranformando um documento em uma string
