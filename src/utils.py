@@ -1,10 +1,7 @@
-#%%
-from pdfminer.high_level import extract_text
-from langchain_text_splitters import RecursiveCharacterTextSplitter
-import regex
+from pdfminer.high_level        import extract_text
+from langchain_text_splitters   import RecursiveCharacterTextSplitter
 import re
 
-#%%
 
 def pdf_parser(pdf_path: str) -> str:
     """ Extrai os textos do pdf, tranformando um documento em uma string
@@ -44,7 +41,7 @@ def chunknizer(
         chunk_size=chunk_size,
         chunk_overlap=chunk_overlap,
         is_separator_regex=False,
-        separators=["\n"]
+        separators=["\n\n"]
     )
     return text_splitter.split_text(text)
 
@@ -60,4 +57,6 @@ def filter_regex(chunks: list, padrao_regex: re.Pattern) -> list:
         list: _description_
     """
     
-    return [chunk for chunk in chunks if padrao_regex.search(chunk)]
+    return [chunk for chunk in chunks if padrao_regex.search(chunk.page_content)]
+
+
