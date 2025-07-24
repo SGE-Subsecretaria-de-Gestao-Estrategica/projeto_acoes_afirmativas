@@ -1,7 +1,7 @@
 #%%
 from pdfminer.high_level import extract_text
 from langchain_text_splitters import RecursiveCharacterTextSplitter
-from regex import regex_verificar_acoes_afirmativas, regex_cotas_negros
+import regex
 import re
 
 #%%
