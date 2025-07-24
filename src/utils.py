@@ -2,7 +2,6 @@ from pdfminer.high_level import extract_text
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 
-
 def pdf_parser(pdf_path: str) -> str:
     """ Extrai os textos do pdf, tranformando um documento em uma string
 
@@ -18,6 +17,7 @@ def pdf_parser(pdf_path: str) -> str:
     except Exception as e:
         print(f"Erro ao extrair texto do PDF com pdfminer.six: {e}")
         return None
+
 
 def chunknizer(
         text: str, 
