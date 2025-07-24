@@ -1,6 +1,6 @@
 import re
 
-def regex_verificar_acoes_afirmativas(texto):
+def regex_verificar_acoes_afirmativas(texto: str):
     """
     Verifica termos relacionados a ações afirmativas e diversidade.
     Retorna True se uma correspondência for encontrada, False caso contrário.
@@ -8,7 +8,7 @@ def regex_verificar_acoes_afirmativas(texto):
     regex_acoes_afirmativas = re.compile(r"(afirmativas?|cotas?|ações\s*afirmativas?|políticas\s*afirmativas?|negros?|negras?|pessoas negras|população negra|agentes\s*culturais\s*negros?|indígenas?|quilombolas?|povos\s*tradicionais|comunidades\s*tradicionais|lgbtqia\+?|lgbt\+?|lgbt|lésbicas?|gays?|agentes culturais indígenas?|bissexuais?|transgêneros?|transexuais?|travestis?|intersexos?|não[- ]bináries?|pessoas trans|agentes culturais com deficiência|pessoas?\s*com\s*deficiência|pcd|mulheres?|equidade de gênero|diversidade|inclusão|acessibilidade|cadeirantes?|mobilidade reduzida)", re.IGNORECASE)
     return regex_acoes_afirmativas
 
-def regex_extrair_valor(texto):
+def regex_extrair_valor(texto: str):
     """
     Extrai valores monetários (ex: R$ 1.234,56).
     Retorna uma lista de todos os valores encontrados, ou uma lista vazia se nenhum for encontrado.
@@ -16,7 +16,7 @@ def regex_extrair_valor(texto):
     regex_valor = re.compile(r"R\$\s*\d{1,3}(?:\.\d{3})*(?:,\d{1,2})?")
     return regex_valor
 
-def regex_extrair_vagas(texto):
+def regex_extrair_vagas(texto: str):
     """
     Extrai números de 'vagas', 'projetos', 'propostas', etc.
     Retorna uma lista de tuplas, onde cada tupla contém (número, palavra-chave),
@@ -31,7 +31,7 @@ def regex_extrair_vagas(texto):
     )
     return regex_vagas
 
-def regex_verificar_porcentagem(texto):
+def regex_verificar_porcentagem(texto: str):
     """
     Verifica porcentagens (ex: 50%).
     Retorna True se uma correspondência for encontrada, False caso contrário.
@@ -39,7 +39,7 @@ def regex_verificar_porcentagem(texto):
     regex_porcentagem = re.compile(r"\d+\s*%")
     return regex_verificar_porcentagem
 
-def regex_cotas_negros(texto):
+def regex_cotas_negros(texto: str):
     """
     Verifica termos relacionados a indivíduos e cultura negra.
     Retorna True se uma correspondência for encontrada, False caso contrário.
@@ -49,9 +49,9 @@ def regex_cotas_negros(texto):
         r"agentes\s*culturais\s*de\s*matriz\s*africana|culturas?\s*negras?|matriz\s*africana)",
         re.IGNORECASE
     )
-    return regex_cotas_negros
+    return regex_negros
 
-def regex_cotas_indigenas(texto):
+def regex_cotas_indigenas(texto: str):
     """
     Verifica termos relacionados a povos e cultura indígena.
     Retorna True se uma correspondência for encontrada, False caso contrário.
@@ -60,9 +60,9 @@ def regex_cotas_indigenas(texto):
       r"(indígenas?|povos?\s*indígenas?|agentes?\s*culturais\s*indígenas?|culturas?\s*indígenas?|agentes\s*culturais\s*indígenas?|comunidades\s*indígenas|tradições\s*indígenas|pessoas?\s*indígenas)",
       re.IGNORECASE
     )
-    return regex_cotas_indigenas
+    return regex_indigenas
 
-def regex_cotas_pcd(texto):
+def regex_cotas_pcd(texto: str):
     """
     Verifica termos relacionados a pessoas com deficiência (PCD).
     Retorna True se uma correspondência for encontrada, False caso contrário.

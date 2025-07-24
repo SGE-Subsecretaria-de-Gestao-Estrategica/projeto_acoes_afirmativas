@@ -1,7 +1,9 @@
 #%%
 from pdfminer.high_level import extract_text
 from langchain_text_splitters import RecursiveCharacterTextSplitter
-from regex import regex_verificar_acoes_afirmativas
+from regex import regex_verificar_acoes_afirmativas, regex_cotas_negros
+import re
+
 #%%
 
 def pdf_parser(pdf_path: str) -> str:
@@ -47,3 +49,15 @@ def chunknizer(
     return text_splitter.split_text(text)
 
 
+def filter_regex(chunks: list, padrao_regex: re.Pattern) -> list:
+    """_summary_
+
+    Args:
+        chunks (list): _description_
+        padrao_regex (re.Pattern): _description_
+
+    Returns:
+        list: _description_
+    """
+    
+    return [chunk for chunk in chunks if padrao_regex.search(chunk)]
