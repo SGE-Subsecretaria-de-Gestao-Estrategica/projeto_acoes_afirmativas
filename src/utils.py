@@ -1,6 +1,12 @@
-from pdfminer.high_level        import extract_text
-from langchain_text_splitters   import RecursiveCharacterTextSplitter
-import re
+
+from pdfminer.high_level                    import extract_text
+from langchain_text_splitters               import RecursiveCharacterTextSplitter
+from langchain_community.embeddings.ollama  import OllamaEmbeddings
+from langchain.vectorstores.chroma          import Chroma
+from langchain_core.documents               import Document
+import re, random
+
+CHROMA_PATH = "./chroma"
 
 
 def pdf_parser(pdf_path: str) -> str:
@@ -58,5 +64,34 @@ def filter_regex(chunks: list, padrao_regex: re.Pattern) -> list:
     """
     
     return [chunk for chunk in chunks if padrao_regex.search(chunk.page_content)]
+
+
+def get_embedding():
+    return OllamaEmbeddings(model= "qwen3.max")
+
+
+def add_to_chroma(documents: list):
+    db = Chroma(
+        persist_directory=CHROMA_PATH, embedding_function=get_embedding()
+    )
+    document_ids = [doc.metadata['id'] for doc in documents]
+    db.add_documents(documents, ids=document_ids)
+    db.persist()
+
+
+def get_chunk_ids(chunks: list) -> list:
+    documents = []
+    used_ids = set()  
+    for i, chunk_text in enumerate(chunks): 
+        while True:
+            random_id = f"{i}-{random.randint(0, len(chunks) * 1000)}" 
+            if random_id not in used_ids:
+                used_ids.add(random_id)
+                break
+
+        # Criar um objeto Document do LangChain
+        doc = Document(page_content=chunk_text, metadata={"id": random_id})
+        documents.append(doc)
+    return documents
 
 

@@ -45,7 +45,7 @@ info_list_str = "\n".join([f"- {item}" for item in INFO_WANTED])
 # %%
 text = """
             7. COTAS
-            O edital irá disponibilizar 2400 projetos
+            O edital irá disponibilizar 2400 vagas
             7.1 Ficam garantidas, conforme descrito no Anexo 1, cotas neste edital para:
             a. pessoas negras(pretas e pardas): 25% (vinte e cincoporcento)das vagas;
             b. pessoas indígenas: 10% (dez por cento) das vagas;
@@ -55,23 +55,23 @@ text = """
 
 """
 
-template_prompt   = """
-ANÁLISE DE EDITAL - EXTRATIVO ESTRITO
+template_prompt = """
+ANÁLISE DE EDITAL - EXTRAÇÃO E SCORE
 
 Instruções:
-1. Responda APENAS com o JSON solicitado
-2. Valores devem ser EXATAMENTE como no texto
-3. Se não encontrar, use "NÃO ENCONTRADO"
+1. Responda apenas com o JSON solicitado
+2. Os valores extraídos devem estar exatamente como no texto
+3. Se a informação não estiver no texto, use "NÃO ENCONTRADO"
+4. Para cada item, informe também um "score_confianca" de 0 a 1, baseado na clareza da informação no texto (1 = certeza absoluta, 0 = muito incerto)
 
 Texto para análise:
 {text}
 
-Extraia:
-- Percentual de cotas para pessoas negras (busque por "negras" e "%")
-- Percentual de cotas para indígenas (busque por "indígenas" e "%")
-- Percentual para PCDs (busque por "deficiência" e "%")
-- Número total de projetos (busque por "projetos" seguido de número)
+Responda as pergunta:
+{questions}
+
 """
+
 #%%
 prompt = PromptTemplate(
     input_variables=['text'],
@@ -80,6 +80,8 @@ prompt = PromptTemplate(
 
 chain = prompt | llm | JsonOutputParser()
 
+#%%
+# response, score = llm.predict_with_score(prompt)
 # %%
 response = chain.invoke({'text': text})
 
