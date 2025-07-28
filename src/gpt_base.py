@@ -15,10 +15,10 @@ chunks      = chunknizer(text=text_parsed)
 # documents   = get_chunk_ids(chunks=chunks)
 
 #%% Filtra
-regex_acoes_afirmativas = regex_patterns.regex_verificar_acoes_afirmativas()
-regex_valor_total       = regex_patterns.regex_extrair_valor()
-regex_vagas_total       = regex_patterns.regex_extrair_vagas()
-regex_porcentagem       = regex_patterns.regex_verificar_porcentagem()
+regex_acoes_afirmativas     = regex_patterns.regex_verificar_acoes_afirmativas()
+regex_valor_total           = regex_patterns.regex_extrair_valor()
+regex_vagas_total           = regex_patterns.regex_extrair_vagas()
+regex_porcentagem           = regex_patterns.regex_verificar_porcentagem()
 
 
 chunks_acoes_afirmativas = [
