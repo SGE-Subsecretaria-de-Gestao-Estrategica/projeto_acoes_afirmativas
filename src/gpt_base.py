@@ -1,88 +1,91 @@
-
+#%% Imports
+from utils import (
+    pdf_parser, 
+    chunknizer, 
+    get_embedding, 
+    add_to_chroma, 
+    get_chunk_ids,
+    call_gpt_4o_mini
+)
 #%%
-from utils import pdf_parser, chunknizer, get_embedding, add_to_chroma, get_chunk_ids
-import tiktoken
 import  regex_patterns
-import pandas as pd 
+import os
+import pandas as pd
+
+# %% Contanates
+INPUT_PATH_ESTADOS = r"C:\Users\Gabriel\Documents\GitHub\editai_extractor_llm_based\data\input\editais_estados"
+
+# %% Carregamento dos dados
+def load_data(input_files: str) -> pd.DataFrame:
+    INPUT_PATH = input_files
+    l = []
+    estados = [nome for nome in os.listdir(INPUT_PATH) if os.path.isdir(os.path.join(INPUT_PATH, nome))]
+    for estado in estados:
+        pasta = INPUT_PATH + f"\{estado}"
+        d = {
+            "estado"     : estado, 
+            "path_files" : [pasta + f"\{f}" for f in os.listdir(pasta) if f.endswith('.pdf')],
+            "files"      : [f for f in os.listdir(pasta) if f.endswith('.pdf')]
+
+        }
+        l.append(d)
+
+    return pd.DataFrame(l)
 
 #%%
-pdf = "./../data/data_test/TOCANTINS_Edital_TCC_-_Pontos_PNCV_1-1-18.pdf"
+df_load_data = load_data(input_files=INPUT_PATH_ESTADOS)
 
-text_parsed = pdf_parser(pdf)
 #%%
-# %% Chunkeia 
-chunks      = chunknizer(text=text_parsed)
-# documents   = get_chunk_ids(chunks=chunks)
+l_documents = []
+l_dict      = []
+for idx, row in df_load_data.iterrows():
+    estado = row["estado"]
+    for idx, path in enumerate(row["path_files"]):
+        id_doc      = row["files"][idx]
+        texto       = pdf_parser(path)
+        chunks      = chunknizer(text=texto)
+        documents   = get_chunk_ids(chunks=chunks, edital_id=id_doc, uf_edital=estado)
+        l_documents.append(documents)
+        d = {
+            "uf": estado,
+            "path_pdf": path,
+            "pdf": id_doc,
+            "document": documents
+        }
+        l_dict.append(d)
 
-#%% Filtra
-regex_acoes_afirmativas     = regex_patterns.regex_verificar_acoes_afirmativas()
-regex_valor_total           = regex_patterns.regex_extrair_valor()
-regex_vagas_total           = regex_patterns.regex_extrair_vagas()
-regex_porcentagem           = regex_patterns.regex_verificar_porcentagem()
+# %% TESTE
+path_teste  = r"C:\Users\Gabriel\Documents\GitHub\editai_extractor_llm_based\data\input\editais_estados\TOCANTINS\TOCANTINS_Edital_Premiação_-_Pontos_e_Pontões_PNCV_1.pdf"
+texto_teste = pdf_parser(path_teste)
+chunks      = chunknizer(text=texto_teste)
+documents   = get_chunk_ids(chunks=chunks, edital_id="TOCANTINS_Edital_Premiação_-_Pontos_e_Pontões_PNCV_1.pdf", uf_edital="TOCANTINS")
 
-
-chunks_acoes_afirmativas = [
-    chunk for chunk in chunks if regex_porcentagem.search(chunk)
-]
-
-chunks_valor_total = [
-    chunk for chunk in chunks if regex_valor_total.search(chunk)
-]
-
-chunks_vagas_total = [
-    chunk for chunk in chunks if regex_vagas_total.search(chunk)
-]
-
-chunks_y = chunks_acoes_afirmativas + chunks_valor_total + chunks_vagas_total
-
-#%% clean
-chunks_y = [i.replace("\n", " ") for i in chunks_y]
-#%%
-def contar_tokens_prompt(chunk_texto: str, model: str = "gpt-4o-mini") -> int:
-    enc = tiktoken.encoding_for_model(model)
-
-    # Prompt base (como será enviado ao modelo)
-    template_prompt = f"""
-            Instruções:
-            - Os valores extraídos devem estar exatamente como no texto
-            - Se a informação não estiver no texto, use "NÃO ENCONTRADO"
-
-            Texto para análise:
-            {chunk_texto}
-
-            Responda as pergunta:
-            - Qual Valor total do edital?
-            - Qual Percentual de cotas para pessoas negras?
-            - Qual Percentual de cotas para pessoas indígenas?
-            - Qual Percentual de cotas para pessoas com deficiência (pcd)?
-            - Quantos projetos/vagas serão disponibilizados no edital?
-            """
-
-    return len(enc.encode(template_prompt.strip()))
-# %%
-def estimar_custo_gpt(tokens_input, tokens_output_est=150, model="gpt-4o-mini"):
-    # Garantir que tokens_input é número
-    tokens_input = int(tokens_input)
+# %% Filtra chunks relevantes
+def filtra_chunks(documents: list):
     
-    if model == "gpt-4o-mini":
-        preco_input = 0.0005  # por 1.000 tokens
-        preco_output = 0.0015
-    elif model == "gpt-4o":
-        preco_input = 0.005
-        preco_output = 0.015
-    else:
-        raise ValueError("Modelo não reconhecido")
+    regex_valor_total       = regex_patterns.regex_extrair_valor()
+    regex_vagas_total       = regex_patterns.regex_extrair_vagas()
+    regex_porcentagem       = regex_patterns.regex_verificar_porcentagem()
 
-    custo = (tokens_input / 1000) * preco_input + (tokens_output_est / 1000) * preco_output
-    return round(custo, 6)
-# %%
-l = []
-for chunk in chunks_y:
-    token_input = contar_tokens_prompt(chunk)
-    d = {
-        "chunk"    : chunk,
-        "n_tokens" : token_input,
-        "custo"    : estimar_custo_gpt(token_input)
-    }
-    l.append(d)
+    # Vamos criar listas de docs filtrados (com metadados)
+   
+    chunks_valor_total       = [doc for doc in documents if regex_valor_total.search(doc.page_content)]
+    chunks_vagas_total       = [doc for doc in documents if regex_vagas_total.search(doc.page_content)]
+    chunks_porcentagem       = [doc for doc in documents if regex_porcentagem.search(doc.page_content)]
+
+    # União dos chunks filtrados (evitando duplicatas)
+    chunks_y = list({doc.metadata['id']: doc for doc in (chunks_valor_total + chunks_vagas_total + chunks_porcentagem)}.values())
+
+    # Substituir quebras de linha no conteúdo mantendo objetos Document
+    for doc in chunks_y:
+        doc.page_content = doc.page_content.replace("\n", " ")
+
+    return chunks_y
+
+
+# %% 
+chunks_relevantes = filtra_chunks(documents)
+texto_completo = "\n\n".join(chunks_relevantes)
+#%%
+resultados = call_gpt_4o_mini(texto_completo)
 # %%

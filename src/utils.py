@@ -1,14 +1,21 @@
-
+#%%
 from pdfminer.high_level                    import extract_text
 from langchain_text_splitters               import RecursiveCharacterTextSplitter
-from langchain_community.embeddings.ollama  import OllamaEmbeddings
+from langchain.embeddings                   import OpenAIEmbeddings
 from langchain.vectorstores.chroma          import Chroma
 from langchain_core.documents               import Document
-import re, random
+from langchain_openai                       import ChatOpenAI
+from langchain_core.prompts                 import ChatPromptTemplate
+from langchain_core.output_parsers          import JsonOutputParser
+from typing                                 import List, Dict
+import re, random, os
+from dotenv import load_dotenv
 
+#%%
 CHROMA_PATH = "./chroma"
-
-
+load_dotenv()
+api_key = os.getenv("OPENAI_API_KEY")
+#%%
 def pdf_parser(pdf_path: str) -> str:
     """ Extrai os textos do pdf, tranformando um documento em uma string
 
@@ -31,7 +38,7 @@ def chunknizer(
         chunk_size: int = 800, 
         chunk_overlap: int = 200
 ) -> list: #TODO -> colocar opção de lista
-    """ Divide variábel de texto em pedaços menores com base no tamanho e sobreposição especificados.
+    """ Divide variável de texto em pedaços menores com base no tamanho e sobreposição especificados.
         Usa quebra de linha para definir a pausa da quabra.
         E.g. 800 + caracteres até a próxima quebra de linha.
     
@@ -67,7 +74,32 @@ def filter_regex(chunks: list, padrao_regex: re.Pattern) -> list:
 
 
 def get_embedding():
-    return OllamaEmbeddings(model= "qwen3.max")
+    return OpenAIEmbeddings(
+        model="text-embedding-3-small",
+        openai_api_key= os.getenv("OPEN_API_KEY")
+    )
+
+def get_chunk_ids(edital_id: str, uf_edital: str, chunks: list) -> list:
+    documents = []
+    used_ids = set()  
+    for i, chunk_text in enumerate(chunks): 
+        while True:
+            random_id = f"{i}-{random.randint(0, len(chunks) * 10000)}" 
+            if random_id not in used_ids:
+                used_ids.add(random_id)
+                break
+
+        # Criar um objeto Document do LangChain
+        doc = Document(
+            page_content=chunk_text, 
+            metadata={
+                "id": random_id,
+                "edital_id": edital_id,
+                "uf_edital": uf_edital
+            }
+        )
+        documents.append(doc)
+    return documents
 
 
 def add_to_chroma(documents: list):
@@ -79,19 +111,37 @@ def add_to_chroma(documents: list):
     db.persist()
 
 
-def get_chunk_ids(chunks: list) -> list:
-    documents = []
-    used_ids = set()  
-    for i, chunk_text in enumerate(chunks): 
-        while True:
-            random_id = f"{i}-{random.randint(0, len(chunks) * 1000)}" 
-            if random_id not in used_ids:
-                used_ids.add(random_id)
-                break
+def call_gpt_4o_mini(texto_completo: str) -> Dict:
+    prompt_template = ChatPromptTemplate.from_messages([
+            ("system", """
+        Você receberá um edital público completo. Extraia APENAS as seguintes informações exatamente como aparecem no texto. Se não estiverem presentes, use "NaN":
 
-        # Criar um objeto Document do LangChain
-        doc = Document(page_content=chunk_text, metadata={"id": random_id})
-        documents.append(doc)
-    return documents
+        - valor_total: Qual o valor total do edital?
+        - cotas_negras: Qual o percentual de cotas para pessoas negras?
+        - cotas_indigenas: Qual o percentual de cotas para pessoas indígenas?
+        - cotas_pcd: Qual o percentual de cotas para pessoas com deficiência (pcd)?
+        - vagas_totais: Quantos projetos/propostas/vagas serão contemplados/disponibilizados/selecionados?
 
+        Responda SOMENTE com um JSON com as seguintes chaves:
+        {{
+        "valor_total": "...",
+        "cotas_negras": "...",
+        "cotas_indigenas": "...",
+        "cotas_pcd": "...",
+        "vagas_totais": "..."
+        }}
+            """),
+            ("human", "{text}")
+        ])
+
+    parser = JsonOutputParser()
+
+    llm = ChatOpenAI(
+        model="gpt-4o-mini",
+        temperature=0,
+        openai_api_key=os.getenv(api_key)
+    )
+
+    chain = prompt_template | llm | parser
+    return chain.invoke({"text": texto_completo})
 
