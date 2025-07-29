@@ -6,8 +6,7 @@ import  regex_patterns
 import pandas as pd 
 
 #%%
-pdf = "./../data/data_test/TOCANTINS_Edital_TCC_-_Pontos_PNCV_1-1-18.pdf"
-
+pdf = r"C:\Users\Gabriel\Documents\GitHub\editai_extractor_llm_based\data\input\editais_estados\TOCANTINS\TOCANTINS_Edital_Premiação_-_Pontos_e_Pontões_PNCV_1.pdf"
 text_parsed = pdf_parser(pdf)
 #%%
 # %% Chunkeia 
@@ -69,12 +68,15 @@ def contar_tokens_prompt(chunk_texto: str, model: str = "gpt-4o-mini") -> int:
 
     return len(enc.encode(template_prompt.strip()))
 # %%
-def estimar_custo_gpt(tokens_input, tokens_output_est=150, model="gpt-4o-mini"):
-    # Garantir que tokens_input é número
+def estimar_custo_gpt(tokens_input, tokens_output_est=150, tokens_embedding=None, model="gpt-4o-mini"):
+    # Garantir que os tokens são números
     tokens_input = int(tokens_input)
-    
+    tokens_output_est = int(tokens_output_est)
+    tokens_embedding = int(tokens_embedding) if tokens_embedding is not None else tokens_input  # default = texto do chunk
+
+    # Preços por 1.000 tokens
     if model == "gpt-4o-mini":
-        preco_input = 0.0005  # por 1.000 tokens
+        preco_input = 0.0005
         preco_output = 0.0015
     elif model == "gpt-4o":
         preco_input = 0.005
@@ -82,16 +84,26 @@ def estimar_custo_gpt(tokens_input, tokens_output_est=150, model="gpt-4o-mini"):
     else:
         raise ValueError("Modelo não reconhecido")
 
-    custo = (tokens_input / 1000) * preco_input + (tokens_output_est / 1000) * preco_output
-    return round(custo, 6)
+    preco_embedding = 0.00002  # text-embedding-3-small (OpenAI)
+
+    custo_input     = (tokens_input / 1000) * preco_input
+    custo_output    = (tokens_output_est / 1000) * preco_output
+    custo_embedding = (tokens_embedding / 1000) * preco_embedding
+
+    custo_total = custo_input + custo_output + custo_embedding
+    return round(custo_total, 6)
 # %%
 l = []
 for chunk in chunks_y:
     token_input = contar_tokens_prompt(chunk)
+    token_embedding = token_input  # ou use outra função se quiser contar separado
+
     d = {
-        "chunk"    : chunk,
-        "n_tokens" : token_input,
-        "custo"    : estimar_custo_gpt(token_input)
+        "chunk"        : chunk,
+        "n_tokens"     : token_input,
+        "custo_total"  : estimar_custo_gpt(token_input, tokens_embedding=token_embedding),
+        "custo_llm"    : estimar_custo_gpt(token_input, tokens_embedding=0),
+        "custo_embed"  : round((token_embedding / 1000) * 0.00002, 6)
     }
     l.append(d)
 # %%
