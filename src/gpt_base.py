@@ -11,6 +11,7 @@ from utils import (
 import  regex_patterns
 import os
 import pandas as pd
+import pickle
 
 # %% Contanates
 INPUT_PATH_ESTADOS = r"C:\Users\Gabriel\Documents\GitHub\editai_extractor_llm_based\data\input\editais_estados"
@@ -53,6 +54,42 @@ for idx, row in df_load_data.iterrows():
             "document": documents
         }
         l_dict.append(d)
+
+#%%
+with open("l_documents.pkl", "wb") as f:
+    pickle.dump(l_documents, f)
+with open("l_dict.pkl", "wb") as f:
+    pickle.dump(l_dict, f)
+
+#%%
+df_dict = pd.DataFrame(l_dict)
+df_dict.to_csv("l_dict.csv")
+
+#%%
+def aplicar_filtragem(df):
+    df = df.copy()
+
+    # Aplica a função que filtra os chunks
+    df["chunks_relevantes"] = df["document"].apply(filtra_chunks)
+
+    # Junta os textos dos chunks filtrados
+    df["texto_completo"] = df["chunks_relevantes"].apply(
+        lambda chunks: "\n\n".join(doc.page_content for doc in chunks)
+    )
+
+    return df
+
+df_filtrado = aplicar_filtragem(df_dict)
+
+#%%
+df_filtrado.to_csv("df_filtrado.csv")
+
+#%%
+df_filtrado["resultado_llm"] = df_filtrado["texto_completo"].apply(call_gpt_4o_mini)
+
+#%%
+df_filtrado.to_csv("df_filtrado_full.csv")
+df_filtrado.to_pickle("df_filtrado_full.pkl")
 
 # %% TESTE
 path_teste  = r"C:\Users\Gabriel\Documents\GitHub\editai_extractor_llm_based\data\input\editais_estados\TOCANTINS\TOCANTINS_Edital_Premiação_-_Pontos_e_Pontões_PNCV_1.pdf"
