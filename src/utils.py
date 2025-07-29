@@ -1,15 +1,15 @@
 #%%
 from pdfminer.high_level                    import extract_text
-from langchain_text_splitters               import RecursiveCharacterTextSplitter
-from langchain.embeddings                   import OpenAIEmbeddings
-from langchain.vectorstores.chroma          import Chroma
-from langchain_core.documents               import Document
 from langchain_openai                       import ChatOpenAI
+from langchain.embeddings                   import OpenAIEmbeddings
 from langchain_core.prompts                 import ChatPromptTemplate
+from langchain_text_splitters               import RecursiveCharacterTextSplitter
+from langchain_core.documents               import Document
 from langchain_core.output_parsers          import JsonOutputParser
+from langchain.vectorstores.chroma          import Chroma
+from dotenv                                 import load_dotenv
 from typing                                 import List, Dict
 import re, random, os
-from dotenv import load_dotenv
 
 #%%
 CHROMA_PATH = "./chroma"
@@ -120,7 +120,7 @@ def call_gpt_4o_mini(texto_completo: str) -> Dict:
         - cotas_negras: Qual o percentual de cotas para pessoas negras?
         - cotas_indigenas: Qual o percentual de cotas para pessoas indígenas?
         - cotas_pcd: Qual o percentual de cotas para pessoas com deficiência (pcd)?
-        - vagas_totais: Quantos projetos/propostas/vagas serão contemplados/disponibilizados/selecionados?
+        - vagas_totais: Quantos projetos/propostas/vagas/prêmios serão contemplados/disponibilizados/selecionados?
 
         Responda SOMENTE com um JSON com as seguintes chaves:
         {{
