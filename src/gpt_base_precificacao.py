@@ -6,7 +6,7 @@ import  regex_patterns
 import pandas as pd 
 
 #%%
-pdf = r"C:\Users\Gabriel\Documents\GitHub\editai_extractor_llm_based\data\input\editais_estados\TOCANTINS\TOCANTINS_Edital_Premiação_-_Pontos_e_Pontões_PNCV_1.pdf"
+pdf = "/Users/gabrielribeirobizerril/Documents/GitHub/llm/editai_extractor_llm_based/data/input/capitais/JOÃO PESSOA/2024-07_JOAOPESSOA_SUBSÍDIO.pdf"
 text_parsed = pdf_parser(pdf)
 #%%
 # %% Chunkeia 
@@ -36,6 +36,10 @@ chunks_y = chunks_acoes_afirmativas + chunks_valor_total + chunks_vagas_total
 
 #%% clean
 chunks_y = [i.replace("\n", " ") for i in chunks_y]
+chunks_full = [i.replace("\n", " ") for i in chunks]
+
+#%%
+chunks_full = " ".join(chunks_full)
 #%%
 def contar_tokens_prompt(chunk_texto: str, model: str = "gpt-4o-mini") -> int:
     enc = tiktoken.encoding_for_model(model)
@@ -92,18 +96,27 @@ def estimar_custo_gpt(tokens_input, tokens_output_est=150, tokens_embedding=None
 
     custo_total = custo_input + custo_output + custo_embedding
     return round(custo_total, 6)
-# %%
-l = []
-for chunk in chunks_y:
-    token_input = contar_tokens_prompt(chunk)
-    token_embedding = token_input  # ou use outra função se quiser contar separado
+# # %%
+# l = []
+# for chunk in chunks_y:
+#     token_input = contar_tokens_prompt(chunk)
+#     token_embedding = token_input  # ou use outra função se quiser contar separado
 
-    d = {
-        "chunk"        : chunk,
+#     d = {
+#         "chunk"        : chunk,
+#         "n_tokens"     : token_input,
+#         "custo_total"  : estimar_custo_gpt(token_input, tokens_embedding=token_embedding),
+#         "custo_llm"    : estimar_custo_gpt(token_input, tokens_embedding=0),
+#         "custo_embed"  : round((token_embedding / 1000) * 0.00002, 6)
+#     }
+#     l.append(d)
+# %%
+token_input = contar_tokens_prompt(chunks_full)
+token_embedding = token_input 
+d = {
         "n_tokens"     : token_input,
         "custo_total"  : estimar_custo_gpt(token_input, tokens_embedding=token_embedding),
         "custo_llm"    : estimar_custo_gpt(token_input, tokens_embedding=0),
         "custo_embed"  : round((token_embedding / 1000) * 0.00002, 6)
     }
-    l.append(d)
 # %%
