@@ -73,3 +73,15 @@ def regex_cotas_pcd():
         re.IGNORECASE
     )
     return regex_cotas_pcd
+
+
+def regex_categoria():
+    """
+    Verifica termos relacionados a 'categoria' e suas variações.
+    Retorna um objeto regex compilado que pode ser usado para busca.
+    """
+    regex_cat = re.compile(
+        r"\bcategorias?\b|\bcategorizad[oa]s?\b|\bcategorização\b|\bcategoriais\b|\bcategoriz[ae]r?\b",
+        re.IGNORECASE
+    )
+    return regex_cat
