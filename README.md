@@ -1,6 +1,7 @@
-# 📑 PNAB Ações Afirmativas
+# 📑 PNAB - Ações Afirmativas
 
 Extração inteligente de informações de editais do ciclo 1 da PNAB (Programa Nacional Aldir Blanc de Fomento à Cultura)
+
 
 
 # 🚀 Visão Geral
@@ -10,6 +11,7 @@ Este projeto foi desenvolvido para interpretar, estruturar e analisar editais cu
 A pipeline utiliza processamento de texto, pré-processamento estruturado e modelos de linguagem (LLMs) para identificar e organizar dados-chave, com destaque para a detecção de ações afirmativas (cotas, vagas reservadas, critérios de inclusão etc.).
 
 
+
 # 🛠️ Funcionalidades
 
 ## 📂 Leitura de PDFs
@@ -17,6 +19,7 @@ A pipeline utiliza processamento de texto, pré-processamento estruturado e mode
 Interpretação automática de editais em PDF.
 
 Conversão para linguagem computacional estruturada.
+
 
 
 ## 🧹 Pré-processamento inteligente
@@ -42,6 +45,7 @@ Apoiar o Programa Nacional Aldir Blanc na análise de editais.
 Fornecer uma base estruturada para dashboards, relatórios e análises.
 
 
+
 # 📂 Estrutura do Projeto
 ├── data/               # PDFs e arquivos de entrada
 ├── outputs/            # Resultados processados (JSON, CSV, etc.)
@@ -52,6 +56,7 @@ Fornecer uma base estruturada para dashboards, relatórios e análises.
 │   └── utils/          # Funções auxiliares
 ├── requirements.txt    # Dependências do projeto
 └── README.md           # Este arquivo
+
 
 
 # ⚙️ Como usar
@@ -78,7 +83,9 @@ python src/main.py data/exemplo_edital.pdf
 ```
 
 
+
 # 📜 Licença
 
 Este projeto está sob a licença MIT.
+
 
