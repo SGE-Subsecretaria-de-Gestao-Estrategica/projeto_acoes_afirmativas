@@ -2,11 +2,13 @@
 
 Extração inteligente de informações de editais do ciclo 1 da PNAB (Programa Nacional Aldir Blanc de Fomento à Cultura)
 
+
 # 🚀 Visão Geral
 
 Este projeto foi desenvolvido para interpretar, estruturar e analisar editais culturais do ciclo 1 da PNAB (Programa Nacional Aldir Blanc de Fomento à Cultura), transformando documentos em PDF em informações computacionais acessíveis.
 
 A pipeline utiliza processamento de texto, pré-processamento estruturado e modelos de linguagem (LLMs) para identificar e organizar dados-chave, com destaque para a detecção de ações afirmativas (cotas, vagas reservadas, critérios de inclusão etc.).
+
 
 # 🛠️ Funcionalidades
 
@@ -16,17 +18,20 @@ Interpretação automática de editais em PDF.
 
 Conversão para linguagem computacional estruturada.
 
+
 ## 🧹 Pré-processamento inteligente
 
 Criação de filtros para limpeza e padronização de textos.
 
 Divisão dos editais em chunks (partes relevantes para análise).
 
+
 ## 🤖 Extração de informações com LLMs
 
 Identificação de menções a ações afirmativas.
 
 Retorno estruturado em formato padronizado (ex.: JSON).
+
 
 # 📊 Objetivos
 
@@ -35,6 +40,7 @@ Facilitar o monitoramento de políticas públicas de fomento cultural.
 Apoiar o Programa Nacional Aldir Blanc na análise de editais.
 
 Fornecer uma base estruturada para dashboards, relatórios e análises.
+
 
 # 📂 Estrutura do Projeto
 ├── data/               # PDFs e arquivos de entrada
@@ -46,6 +52,7 @@ Fornecer uma base estruturada para dashboards, relatórios e análises.
 │   └── utils/          # Funções auxiliares
 ├── requirements.txt    # Dependências do projeto
 └── README.md           # Este arquivo
+
 
 # ⚙️ Como usar
 
@@ -69,6 +76,7 @@ Rodar o pipeline de extração
 ```
 python src/main.py data/exemplo_edital.pdf
 ```
+
 
 # 📜 Licença
 
