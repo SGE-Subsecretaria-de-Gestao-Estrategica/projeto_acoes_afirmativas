@@ -50,10 +50,10 @@ Fornecer uma base estruturada para dashboards, relatórios e análises.
 <br>    ├── data/               # PDFs e arquivos de entrada
 <br>    ├── outputs/            # Resultados processados (JSON, CSV, etc.)
 <br>    ├── src/                # Código-fonte principal
-<br>    │   ├── pdf_extractor/  # Módulos de extração de PDFs
-<br>    │   ├── preprocessing/  # Limpeza e chunking dos textos
-<br>    │   ├── llm/            # Rotinas de interação com modelos de linguagem
-<br>    │   └── utils/          # Funções auxiliares
+<br>       ├── pdf_extractor/  # Módulos de extração de PDFs
+<br>       ├── preprocessing/  # Limpeza e chunking dos textos
+<br>       ├── llm/            # Rotinas de interação com modelos de linguagem
+<br>       └── utils/          # Funções auxiliares
 <br>    ├── requirements.txt    # Dependências do projeto
 <br>    └── README.md           # Este arquivo
 
