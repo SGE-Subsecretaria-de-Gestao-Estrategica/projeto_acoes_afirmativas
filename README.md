@@ -1,6 +1,6 @@
 # 📑 PNAB - Ações Afirmativas
 
-Extração inteligente de informações de editais do ciclo 1 da PNAB (Programa Nacional Aldir Blanc de Fomento à Cultura)
+Extração de informações de editais do ciclo 1 da PNAB (Programa Nacional Aldir Blanc de Fomento à Cultura)
 
 
 
