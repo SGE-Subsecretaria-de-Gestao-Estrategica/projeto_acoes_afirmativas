@@ -1,6 +1,5 @@
 .venv
 venv
-data
 .DS_Store
 models
 venv_py311
@@ -8,3 +7,4 @@ tratamento
 resultados
 /src/.env
 tratamento/
+src/__init__.py
