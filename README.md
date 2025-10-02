@@ -47,16 +47,14 @@ Fornecer uma base estruturada para dashboards, relatórios e análises.
 
 
 # 📂 Estrutura do Projeto
-<br>    ├── data/               # PDFs e arquivos de entrada
-<br>    ├── outputs/            # Resultados processados (JSON, CSV, etc.)
-<br>    ├── src/                # Código-fonte principal
-<br>       ├── pdf_extractor/  # Módulos de extração de PDFs
-<br>       ├── preprocessing/  # Limpeza e chunking dos textos
-<br>       ├── llm/            # Rotinas de interação com modelos de linguagem
-<br>       └── utils/          # Funções auxiliares
-<br>    ├── requirements.txt    # Dependências do projeto
-<br>    └── README.md           # Este arquivo
-
+<br>    ├── data/     # PDFs e arquivos de entrada
+<br>    ├── outputs/  # Resultados processados (JSON, CSV, etc.)
+<br>    ├── src/   # Código-fonte principal
+<br>    &nbsp;&nbsp;&nbsp;&nbsp;   ├── main.py   # Código principal
+<br>    &nbsp;&nbsp;&nbsp;&nbsp;   ├── regex_patterns.py   # Padrões de regex utilizados nos filtros
+<br>    &nbsp;&nbsp;&nbsp;&nbsp;   └── utils.py   # Funções auxiliares
+<br>    ├── requirements.txt # Dependências do projeto
+<br>    └── README.md # Este arquivo
 
 
 # ⚙️ Como usar
