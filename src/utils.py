@@ -1,4 +1,3 @@
-#%%
 from pdfminer.high_level                    import extract_text
 from langchain_openai                       import ChatOpenAI
 from langchain.embeddings                   import OpenAIEmbeddings
@@ -11,11 +10,10 @@ from dotenv                                 import load_dotenv
 from typing                                 import List, Dict
 import re, random, os
 
-#%%
 CHROMA_PATH = "./chroma"
 load_dotenv()
 api_key = os.getenv("OPENAI_API_KEY")
-#%%
+
 def pdf_parser(pdf_path: str) -> str:
     """ Extrai os textos do pdf, tranformando um documento em uma string
 
