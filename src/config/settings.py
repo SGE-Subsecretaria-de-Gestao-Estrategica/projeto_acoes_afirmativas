@@ -32,7 +32,7 @@ ESTADO_SHEET_NAME: str = 'dados consolidados - não mexer'
 # ESTADOS
 RENAME_COLUNAS_ESTADO: dict = {
     'ESTADO': 'ente_federativo',
-    'pdf':'nome_pdf',
+    'pdf':'nome_pdf_pk',
     'cotas_negras': 'perc_cotas_negras',
     'cotas_indigenas': 'perc_cotas_indigenas',
     'cotas_pcd': 'perc_cotas_pcd',
