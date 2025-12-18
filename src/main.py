@@ -1,9 +1,7 @@
 # Imports
-from utils import (
+from llm_config import (
     pdf_parser, 
     chunknizer, 
-    get_embedding, 
-    add_to_chroma, 
     get_chunk_ids,
     call_gpt_4o_mini
 )
