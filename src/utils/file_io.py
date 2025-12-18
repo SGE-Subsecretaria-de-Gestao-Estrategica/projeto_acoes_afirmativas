@@ -45,7 +45,7 @@ def save_data(
     format: str = ".csv",
     area: AreaType = "interim",
 ) -> Path:
-    """Salva DataFrame em CSV ou PKL com timestamp e retorno do caminho.
+    """Salva DataFrame em CSV, PKL ou PARQUET com timestamp e retorno do caminho.
     AreaType = ["raw", "interim", "processed", "external", "final"]
     """
     file_path = create_path_file(file_name=file_name, area=area, format=format)
@@ -57,7 +57,7 @@ def save_data(
     elif format == ".parquet":
         dataframe.to_parquet(file_path)
     else:
-        raise ValueError("Formato não suportado. Use '.csv' ou '.pkl'.")
+        raise ValueError("Formato não suportado. Use '.csv','.pkl' ou '.parquet'.")
 
     return file_path
 
