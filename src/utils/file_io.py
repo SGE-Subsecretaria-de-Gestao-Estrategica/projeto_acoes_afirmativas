@@ -3,7 +3,7 @@ import polars as pl
 from pathlib import Path
 from datetime import datetime
 from typing import Literal, Union
-from utils import paths
+from config import settings
 import os
 import zipfile 
 import tempfile
@@ -13,11 +13,11 @@ import shutil
 AreaType = Literal["raw", "interim", "processed", "external", "final"]
 
 _PATH_MAP = {
-    "raw": paths.RAW_DATA_PATH,
-    "interim": paths.INTERIM_DATA_PATH,
-    "processed": paths.PROCESSED_DATA_PATH,
-    "external": paths.EXTERNAL_DATA_PATH,
-    "final": paths.FINAL_DATA_PATH,
+    "raw": settings.RAW_DATA_PATH,
+    "interim": settings.INTERIM_DATA_PATH,
+    "processed": settings.PROCESSED_DATA_PATH,
+    "external": settings.EXTERNAL_DATA_PATH,
+    "final": settings.FINAL_DATA_PATH,
 }
 
 
