@@ -31,6 +31,7 @@ def padronizar_percentual(serie: pd.Series) -> pd.Series:
 
     return serie.apply(converter).astype(float)
 
+
 def moeda_br_para_float(serie: pd.Series) -> pd.Series:
     def converter(valor):
         if pd.isna(valor):
@@ -59,3 +60,29 @@ def moeda_br_para_float(serie: pd.Series) -> pd.Series:
         return float(valor_str)
 
     return serie.apply(converter)
+
+
+def coluna_sim_para_bool(
+    df: pd.DataFrame,
+    col: str,
+    valor_true: str = 'sim'
+) -> pd.DataFrame:
+    """
+    Converte uma coluna textual (ex: 'sim' / 'não') em booleano.
+
+    Regras:
+    - valor_true (default='sim') → True
+    - qualquer outro valor → False
+    - ignora caixa, espaços e lida com NaN
+
+    Retorna o próprio DataFrame (mutável).
+    """
+    df[col] = (
+        df[col]
+        .astype(str)
+        .str.strip()
+        .str.lower()
+        .eq(valor_true)
+    )
+
+    return df
