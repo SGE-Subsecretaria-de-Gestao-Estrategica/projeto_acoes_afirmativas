@@ -39,3 +39,14 @@ RENAME_COLUNAS_ESTADO: dict = {
     'novo': 'is_novo'
 }
 COLUNAS_INTERESSE_ESTADO: list = ['ESTADO', 'pdf', 'cotas_negras', 'cotas_indigenas', 'cotas_pcd', 'vagas_totais','valor_total','novo']
+
+# CAPITAL
+CAPITAL_COLUNAS_INTERESSE = ['uf', 'pdf', 'valor_total', 'cotas_negras', 'cotas_indigenas', 'cotas_pcd', 'vagas_totais', 'novo']
+CAPITAL_RENAME_COLUNAS = {
+    'uf' : 'ente_federativo',
+    'pdf': 'nome_pdf_pk',
+    'cotas_negras': 'perc_cotas_negras',
+    'cotas_indigenas': 'perc_cotas_indigenas',
+    'cotas_pcd': 'perc_cotas_pcd',
+    'novo':'is_novo'
+}
