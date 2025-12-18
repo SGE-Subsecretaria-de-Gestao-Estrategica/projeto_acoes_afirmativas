@@ -2,6 +2,7 @@ from config import settings
 from pathlib import Path
 from utils import file_io
 import pandas as pd
+import numpy as np
 from transform import sanitize
 pd.set_option('display.max_columns', None)
 
@@ -29,6 +30,13 @@ if __name__=='__main__':
     # Passa vagas totais para formato integer
     df['vagas_totais'] = df['vagas_totais'].astype('Int64')
 
-    # 
+    # Corrige coluna is_novo para booleano
+    df = sanitize.coluna_sim_para_bool(df, col='is_novo')
+
+    # Log
+    print(df.describe(include=[np.number]))
+    print(df.describe(include=[object]))
+
+    # Salva arquivos em processados 
     file_io.save_data(df, file_name='estados_processado', format='.parquet', area='processed')
     file_io.save_data(df, file_name='estados_processado', format='.csv', area='processed')
