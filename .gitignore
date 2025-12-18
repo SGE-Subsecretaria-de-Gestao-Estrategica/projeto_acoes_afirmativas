@@ -11,3 +11,4 @@ src/__init__.py
 __pycache__/
 *.py[cod]
 *.pyo
+data/
