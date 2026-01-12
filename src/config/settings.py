@@ -39,3 +39,74 @@ RENAME_COLUNAS_ESTADO: dict = {
     'novo': 'is_novo'
 }
 COLUNAS_INTERESSE_ESTADO: list = ['ESTADO', 'pdf', 'cotas_negras', 'cotas_indigenas', 'cotas_pcd', 'vagas_totais','valor_total','novo']
+MAP_ESTADOS_IBGE = {
+    "ACRE": "12",
+    "ALAGOAS": "27",
+    "AMAPA": "16",
+    "AMAZONAS": "13",
+    "BAHIA": "29",
+    "CEARA": "23",
+    "DISTRITO FEDERAL": "53",
+    "ESPIRITO SANTO": "32",
+    "GOIAS": "52",
+    "MARANHAO": "21",
+    "MATO GROSSO": "51",
+    "MATO GROSSO DO SUL": "50",
+    "MINAS GERAIS": "31",
+    "PARA": "15",
+    "PARAIBA": "25",
+    "PARANA": "41",
+    "PERNAMBUCO": "26",
+    "PIAUI": "22",
+    "RIO DE JANEIRO": "33",
+    "RIO GRANDE DO NORTE": "24",
+    "RIO GRANDE DO SUL": "43",
+    "RONDONIA": "11",
+    "RORAIMA": "14",
+    "SANTA CATARINA": "42",
+    "SAO PAULO": "35",
+    "SERGIPE": "28",
+    "TOCANTINS": "17"
+}
+
+
+# CAPITAL
+CAPITAL_COLUNAS_INTERESSE = ['uf', 'pdf', 'valor_total', 'cotas_negras', 'cotas_indigenas', 'cotas_pcd', 'vagas_totais', 'novo']
+CAPITAL_RENAME_COLUNAS = {
+    'uf' : 'ente_federativo',
+    'pdf': 'nome_pdf_pk',
+    'cotas_negras': 'perc_cotas_negras',
+    'cotas_indigenas': 'perc_cotas_indigenas',
+    'cotas_pcd': 'perc_cotas_pcd',
+    'novo':'is_novo'
+}
+MAP_CAPITAIS_IBGE = {
+    "ARACAJU": "2800308",
+    "BELEM": "1501402",
+    "BELO HORIZONTE": "3106200",
+    "BOA VISTA": "1400100",
+    "CAMPO GRANDE": "5002704",
+    "CUIABA": "5103403",
+    "CURITIBA": "4106902",
+    "FLORIANOPOLIS": "4205407",
+    "FORTALEZA": "2304400",
+    "GOIANIA": "5208707",
+    "JOAO PESSOA": "2507507",
+    "MACAPA": "1600303",
+    "MACEIO": "2704302",
+    "MANAUS": "1302603",
+    "NATAL": "2408102",
+    "PALMAS": "1721000",
+    "PORTO ALEGRE": "4314902",
+    "PORTO VELHO": "1100205",
+    "RECIFE": "2611606",
+    "RIO BRANCO": "1200401",
+    "SALVADOR": "2927408",
+    "SAO LUIS": "2111300",
+    "SAO PAULO (CAPITAL)": "3550308",
+    "TERESINA": "2211001",
+    "VITORIA": "3205309",
+    "RIO DE JANEIRO (CAPITAL)":"2111300"
+}
+
+

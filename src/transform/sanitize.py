@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 import re
+import unicodedata
 
 def padronizar_percentual(serie: pd.Series) -> pd.Series:
     def converter(valor):
@@ -86,3 +87,15 @@ def coluna_sim_para_bool(
     )
 
     return df
+
+def normalizar_texto(txt: str) -> str:
+    if pd.isna(txt):
+        return None
+
+    txt = unicodedata.normalize("NFD", txt)
+    txt = txt.encode("ascii", "ignore").decode("utf-8")
+    txt = txt.upper()
+    txt = re.sub(r"\s+", " ", txt).strip()
+
+    return txt
+
