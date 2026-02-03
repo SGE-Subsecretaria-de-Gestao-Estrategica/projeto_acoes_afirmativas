@@ -110,3 +110,34 @@ MAP_CAPITAIS_IBGE = {
 }
 
 
+# DATA VIZ
+BINS_PESSOAS_NEGRAS    = [0.0, 0.2000000001, 0.25, 0.30, 1.0000001]
+LABELS_PESSOAS_NEGRAS  = [
+    r"Menor ou   igual a 20% ", 
+    r"Entre 21% e 25% ", 
+    r"Entre 26% e 30%", 
+    r"Acima de 30%"
+]
+COLORS_PESSOAS_NEGRAS = [
+    "#E28D8D", 
+    "#D96D6D", 
+    "#B22E2E", 
+    "#511515"
+]
+
+
+
+BINS_PESSOAS_NEGRAS    = [0.0, 0.2000000001, 0.25, 0.30, 1.0000001]
+LABELS_PESSOAS_NEGRAS  = [
+    r"Menor ou   igual a 20% ", 
+    r"Entre 21% e 25% ", 
+    r"Entre 26% e 30%", 
+    r"Acima de 30%"
+]
+COLORS_PESSOAS_NEGRAS = [
+    "#E28D8D", 
+    "#D96D6D", 
+    "#B22E2E", 
+    "#511515"
+]
+

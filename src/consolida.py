@@ -7,7 +7,7 @@ pd.set_option('display.max_columns', None)
 
 # DATA_PRINCIPAL_FILE_PATH = '../data/processed/Ações Afirmativas na Política Nacional Aldir Blanc - Análise de Descumprimentos.xlsx'
 # DATA_V2                  = '../data/processed/base_dados_09_01_26_14h50.xlsx'
-DATA_V3                  = '../data/processed/base_dados_09_01_26_19h50.xlsx'
+DATA_V3                  = '../data/processed/base_dados_12_01_2026_12h.xlsx'
 # DATA_V2_ABA              = 'base_dados_09-01-26'
 DATA_V3_ABA              = 'base_dados_09_01_26_completa'
 GEO_DATA_EST             = 'ibge_est_regioes_5_12_2025_14_49.parquet'
@@ -56,26 +56,26 @@ def transform_v2():
     # Cria coluna de Tipo de Edital
     df = features.cria_tipo_edital(df)
 
-    print(df['exclusivo'].value_counts())
-    tipo_exclusivo = 'PCD'
+    # print(df['exclusivo'].value_counts())
+    # tipo_exclusivo = 'PCD'
 
 
 
-    print(f"Tamanho Base ESTADO- {tipo_exclusivo}")
-    print(len(df[(df['tipo_ente'] == 'ESTADO')&(df['exclusivo']==tipo_exclusivo)]))
-    print(f"Tamanho Base CPITAL- {tipo_exclusivo}")
-    print(len(df[(df['tipo_ente'] == 'CAPITAL')&(df['exclusivo']==tipo_exclusivo)]))
-    print(f"Vagas total ESTADOS - {tipo_exclusivo}")
-    print(df[(df['tipo_ente'] == 'ESTADO')&(df['exclusivo']==tipo_exclusivo)]['vagas_totais'].sum())
-    print(f"Vagas total CAPITAIS - {tipo_exclusivo}")
-    print(df[(df['tipo_ente'] == 'CAPITAL')&(df['exclusivo']==tipo_exclusivo)]['vagas_totais'].sum())
+    # print(f"Tamanho Base ESTADO- {tipo_exclusivo}")
+    # print(len(df[(df['tipo_ente'] == 'ESTADO')&(df['exclusivo']==tipo_exclusivo)]))
+    # print(f"Tamanho Base CPITAL- {tipo_exclusivo}")
+    # print(len(df[(df['tipo_ente'] == 'CAPITAL')&(df['exclusivo']==tipo_exclusivo)]))
+    # print(f"Vagas total ESTADOS - {tipo_exclusivo}")
+    # print(df[(df['tipo_ente'] == 'ESTADO')&(df['exclusivo']==tipo_exclusivo)]['vagas_totais'].sum())
+    # print(f"Vagas total CAPITAIS - {tipo_exclusivo}")
+    # print(df[(df['tipo_ente'] == 'CAPITAL')&(df['exclusivo']==tipo_exclusivo)]['vagas_totais'].sum())
 
-    print(f"\nValor total ESTADOS - {tipo_exclusivo}")
-    print(df[(df['tipo_ente'] == 'ESTADO')&(df['exclusivo']==tipo_exclusivo)]['valor_total'].sum())
-    print(f"Valor total CAPITAIS - {tipo_exclusivo}")
-    print(df[(df['tipo_ente'] == 'CAPITAL')&(df['exclusivo']==tipo_exclusivo)]['valor_total'].sum())
+    # print(f"\nValor total ESTADOS - {tipo_exclusivo}")
+    # print(df[(df['tipo_ente'] == 'ESTADO')&(df['exclusivo']==tipo_exclusivo)]['valor_total'].sum())
+    # print(f"Valor total CAPITAIS - {tipo_exclusivo}")
+    # print(df[(df['tipo_ente'] == 'CAPITAL')&(df['exclusivo']==tipo_exclusivo)]['valor_total'].sum())
 
-    # features.print_resumo(df)
+    # # features.print_resumo(df)
     # print('++++++++++++++++++++')
     # print('\n++++++++++++++++++++')
     # print('\n++++++++++++++++++++')
