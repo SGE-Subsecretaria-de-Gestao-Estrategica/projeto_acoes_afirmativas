@@ -147,9 +147,9 @@ def agregar_tabela_sniic(df: pd.DataFrame) -> pd.DataFrame:
             sum_vagas_cotas_negras=("vagas_cotas_negras", "sum"),
             sum_vagas_cotas_indigenas=("vagas_cotas_indigenas", "sum"),
             sum_vagas_cotas_pcd=("vagas_cotas_pcd", "sum"),
-            perc_mean_cotas_negras=("perc_cotas_negras", "mean"),
-            perc_mean_cotas_indigenas=("perc_cotas_indigenas", "mean"),
-            perc_mean_cotas_pcd=("perc_cotas_pcd", "mean"),
+            # perc_mean_cotas_negras=("perc_cotas_negras", "mean"),
+            # perc_mean_cotas_indigenas=("perc_cotas_indigenas", "mean"),
+            # perc_mean_cotas_pcd=("perc_cotas_pcd", "mean"),
         )
     )
 
