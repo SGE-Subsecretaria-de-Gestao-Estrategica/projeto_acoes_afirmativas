@@ -99,3 +99,4 @@ def normalizar_texto(txt: str) -> str:
 
     return txt
 
+

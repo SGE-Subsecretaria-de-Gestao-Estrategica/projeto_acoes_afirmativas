@@ -110,3 +110,56 @@ MAP_CAPITAIS_IBGE = {
 }
 
 
+# DATA VIZ
+BINS_PESSOAS_NEGRAS    = [0.0, 0.2000000001, 0.25, 0.30, 1.0000001]
+LABELS_PESSOAS_NEGRAS  = [
+    r"Menor ou   igual a 20% ", 
+    r"Entre 21% e 25% ", 
+    r"Entre 26% e 30%", 
+    r"Acima de 30%"
+]
+COLORS_PESSOAS_NEGRAS = [
+    "#E28D8D", 
+    "#D96D6D", 
+    "#B22E2E", 
+    "#511515"
+]
+
+
+BINS_PESSOAS_NEGRAS    = [0.0, 0.2000000001, 0.25, 0.30, 1.0000001]
+LABELS_PESSOAS_NEGRAS  = [
+    r"Menor ou   igual a 20% ", 
+    r"Entre 21% e 25% ", 
+    r"Entre 26% e 30%", 
+    r"Acima de 30%"
+]
+COLORS_PESSOAS_NEGRAS = [
+    "#E28D8D", 
+    "#D96D6D", 
+    "#B22E2E", 
+    "#511515"
+]
+
+
+# CENSO DEMOGRÁFICO
+RENAME_COLUMNS_CENSO = {
+   'Unidade da Federação e Município': 'nome_ente',
+   'Total': 'pop_total',
+   'Branca': 'pop_branca',
+   'Preta': 'pop_preta',
+   'Amarela': 'pop_amarela',
+   'Parda': 'pop_parda',
+   'Indígena': 'pop_indigena'
+}
+
+COLS_POP = [
+    "pop_branca",
+    "pop_preta",
+    "pop_amarela",
+    "pop_parda",
+    "pop_indigena",
+    "pop_pcd",
+    "pop_pessoas_negras",
+]
+
+COLS_NUM = COLS_POP + ["pop_total"]
