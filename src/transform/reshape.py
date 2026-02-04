@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 
 def classifica_tipo_ente(df: pd.DataFrame, col_cod: str = 'cod_ibge') -> pd.DataFrame:
     df = df.copy()
@@ -12,8 +13,7 @@ def classifica_tipo_ente(df: pd.DataFrame, col_cod: str = 'cod_ibge') -> pd.Data
 
     return df
 
-import numpy as np
-import pandas as pd
+
 
 
 def calcular_proporcoes_valor_e_vagas(df: pd.DataFrame) -> pd.DataFrame:
