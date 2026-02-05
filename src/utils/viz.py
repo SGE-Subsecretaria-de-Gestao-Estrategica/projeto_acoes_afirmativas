@@ -23,6 +23,7 @@ def plot_mapa_estados_continuo(
     edgecolor="black",
     linewidth=0.7,
     missing_color="#eeeeee",
+    show=True
 ):
     """
     Fluxo:
@@ -96,7 +97,7 @@ def plot_mapa_estados_continuo(
     )
 
     ax.set_axis_off()
-    ax.set_title(title or f"Brasil — {value_col} ({modo.capitalize()})")
+    # ax.set_title(title or f"Brasil — {value_col} ({modo.capitalize()})")
 
     # -------- COLORBAR DISCRETA --------
     sm = mpl.cm.ScalarMappable(cmap=cmap, norm=norm)
@@ -115,6 +116,8 @@ def plot_mapa_estados_continuo(
         Path(save_path).parent.mkdir(parents=True, exist_ok=True)
         fig.savefig(f"{save_path}.png", dpi=300, bbox_inches="tight")
         fig.savefig(f"{save_path}.svg", bbox_inches="tight")
-
-    plt.show()
-    plt.close(fig)
+    if show is True:
+        plt.show()
+        plt.close(fig)
+    else: 
+        return None
