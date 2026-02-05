@@ -8,7 +8,7 @@ EXECUCAO_FILE_PATH      = '../data/external/Execução Financeira - Política Na
 ADESAO_FILE_PATH        = '../data/external/Adesão - Politica Nacional Aldir Blanc.xlsx'
 
 IBGE_TABELA             = '../data/external/POP2024_20241230.xls'
-GEO_JSON                = r'C:\Users\gabiru\Documents\GitHub\projeto_acoes_afirmativas\data\external\br_states.json'
+GEO_JSON                = settings.EXTERNAL_DATA_PATH / 'br_states.json'
 
 TABELA_SNIIC            = '../data/final/tabela_final_3_2_2026_13_53.parquet'
 FINAL_TABLE_FILE_PATH   = '../data/final/tabela_final_3_2_2026_13_53.parquet'
@@ -34,53 +34,41 @@ df_adesao = df_adesao.drop_duplicates()
 df_adesao = df_adesao.reset_index(drop=True)
 
 
-# TRATAMENTO TABELA_SNIIC - CRIAMOS A TABELA DE VALORES AGREGADO
-df = reshape.agregar_tabela_sniic(df=df_tabela_sniic)
+def pipeline(df, tipo_ente):
+    df = df.loc[df['tipo_ente'] == tipo_ente]
+
+    # TRATAMENTO TABELA_SNIIC - CRIAMOS A TABELA DE VALORES AGREGADO
+    df = reshape.agregar_tabela_sniic(df=df)
+
+    # CALCULO DE VALOR E VAGA
+    df = reshape.calcular_totais_cotas(df=df)
 
 
-# CALCULO DE VALOR E VAGA
-df = reshape.calcular_totais_cotas(df=df)
+    # MERGE DF E DF_ADESAO
+    df = df.merge(right=df_adesao, how='left', on='cod_ibge')
+
+    if tipo_ente == "MUNICIPIO":
+        # CORRIGE O RIO DE JANEIRO
+        df.loc[df['ente_federativo'] == 'RIO DE JANEIRO (capital)', 'uf'] = 'RJ'
+    
+    # TRANSFORMA VALORES EM VAGAS
+    df = reshape.calcular_proporcoes_valor_e_vagas(df=df)
+
+    return df
 
 
-# ARREDONDA PERC
-cols_perc = [
-    "perc_mean_cotas_negras",
-    "perc_mean_cotas_indigenas",
-    "perc_mean_cotas_pcd",
-]
-df[cols_perc] = df[cols_perc].round(2)
-
-
-# MERGE DF E DF_ADESAO
-df_merged = df.merge(right=df_adesao, how='left', on='cod_ibge')
-
-
-# CORRIGE O RIO DE JANEIRO
-df_merged.loc[df['ente_federativo'] == 'RIO DE JANEIRO (capital)', 'uf'] = 'RJ'
-
-
-# CHECKPOINT
-df = df_merged.copy()
-
-
-# TRANSFORMA VALORES EM VAGAS
-df = reshape.calcular_proporcoes_valor_e_vagas(df=df)
-
-mask_tipo_ente = df['tipo_ente'] == 'ESTADO'
-
-print(df.loc[mask_tipo_ente]['perc_mean_cotas_negras'].value_counts())
-
-
+df = pipeline(df=df_tabela_sniic, tipo_ente='ESTADO')
 # VISUALIZAÇÃO
 viz.plot_mapa_estados_continuo(
     df=df,
     geo_path=GEO_JSON,
-    value_col="perc_mean_cotas_negras",  
+    value_col="rel_valor_cotas_pcd",  
     modo="ESTADO",
-    bins=settings.BINS_PESSOAS_NEGRAS,
-    labels=settings.LABELS_PESSOAS_NEGRAS,
-    colors=settings.COLORS_PESSOAS_NEGRAS,
-    right=True,                       
-    title="Pessoas Negras — Percentual Médio de Cotas por Estado ",
-    save_path="outputs/mapa__pessoa__negra_260302_H1532"
+    bins=settings.BINS_PESSOAS_PCD,
+    labels=settings.LABELS_PESSOAS_PCD,
+    colors=settings.COLORS_PESSOAS_PCD,
+    right=True,                     
+    title="Pessoas Indígenas — Relação Cotas / Valor (R$)",
+    save_path="outputs/final/mapa__pessoas__pcd_260204_H1228",
+    show=False
 )
