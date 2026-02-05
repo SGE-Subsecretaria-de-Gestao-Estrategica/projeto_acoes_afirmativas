@@ -110,35 +110,70 @@ MAP_CAPITAIS_IBGE = {
 }
 
 
-# DATA VIZ
+# DATA VIZ - PESSOAS NEGRAS
 BINS_PESSOAS_NEGRAS    = [0.0, 0.2000000001, 0.25, 0.30, 1.0000001]
-LABELS_PESSOAS_NEGRAS  = [
-    r"Menor ou   igual a 20% ", 
-    r"Entre 21% e 25% ", 
-    r"Entre 26% e 30%", 
-    r"Acima de 30%"
+LABELS_PESSOAS_NEGRAS = [
+    r"Menor ou igual a 20%",
+    r"Maior ou igual a 21% e menor que 25%",
+    r"Maior ou igual a 25% e menor que 30%",
+    r"Maior ou igual a 30%"
 ]
-COLORS_PESSOAS_NEGRAS = [
-    "#E28D8D", 
+COLORS_PESSOAS_NEGRAS  = [
+    "#F2CECE", 
     "#D96D6D", 
     "#B22E2E", 
     "#511515"
 ]
 
+# DATA VIZ - PESSOAS INDÍGENAS
+# DATA VIZ - PESSOAS INDÍGENAS
+BINS_PESSOAS_INDIGENAS = [
+    0.0,
+    0.0500000001,
+    0.10,
+    0.20,
+    1.0000001
+]
 
-BINS_PESSOAS_NEGRAS    = [0.0, 0.2000000001, 0.25, 0.30, 1.0000001]
-LABELS_PESSOAS_NEGRAS  = [
-    r"Menor ou   igual a 20% ", 
-    r"Entre 21% e 25% ", 
-    r"Entre 26% e 30%", 
-    r"Acima de 30%"
+LABELS_PESSOAS_INDIGENAS = [
+    r"Menor ou igual a 5%",
+    r"Maior ou igual a 6% e menor que 10%",
+    r"Maior ou igual a 10% e menor que 20%",
+    r"Maior ou igual a 20%"
 ]
-COLORS_PESSOAS_NEGRAS = [
-    "#E28D8D", 
-    "#D96D6D", 
-    "#B22E2E", 
-    "#511515"
+
+COLORS_PESSOAS_INDIGENAS = [
+    "#DFF2E1",  # verde claro
+    "#9ED9A5",  # verde médio claro
+    "#4FAF64",  # verde médio escuro
+    "#1F5C2E"   # verde escuro
 ]
+
+
+# DATA VIZ - PESSOAS COM DEFICIÊNCIA (PCD)
+# DATA VIZ - PESSOAS COM DEFICIÊNCIA (PCD)
+BINS_PESSOAS_PCD = [
+    0.0,
+    0.0200000001,
+    0.0400000001,
+    0.0700000001,
+    1.0000001
+]
+
+LABELS_PESSOAS_PCD = [
+    r"Menor ou igual a 2%",
+    r"Maior ou igual a 3% e menor que 4%",
+    r"Maior ou igual a 5% e menor que 7%",
+    r"Maior ou igual a 7%"
+]
+
+COLORS_PESSOAS_PCD = [
+    "#D6E6F5",  # azul claro
+    "#8BBCE6",  # azul médio claro
+    "#3B82C4",  # azul médio escuro
+    "#0F2F4F"   # azul escuro
+]
+
 
 
 # CENSO DEMOGRÁFICO
