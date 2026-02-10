@@ -1,10 +1,10 @@
-# 📑 PNAB - Ações Afirmativas
+# PNAB - Ações Afirmativas
 
 Extração e sistematização de dados dos editais estaduais e das capitais referentes ao ciclo 1 da PNAB (Programa Nacional Aldir Blanc de Fomento à Cultura).
 
 
 
-# 🚀 Visão Geral
+# Visão Geral
 
 Este projeto foi desenvolvido para interpretar, estruturar e analisar editais culturais do ciclo 1 da PNAB (Programa Nacional Aldir Blanc de Fomento à Cultura), transformando documentos em PDF em informações computacionais acessíveis.
 
@@ -12,9 +12,9 @@ A pipeline utiliza processamento de texto, pré-processamento estruturado e mode
 
 
 
-# 🛠️ Funcionalidades
+# Funcionalidades
 
-## 📂 Leitura de PDFs
+## Leitura de PDFs
 
 Interpretação automática de editais em PDF.
 
@@ -22,21 +22,21 @@ Conversão para linguagem computacional estruturada.
 
 
 
-## 🧹 Pré-processamento inteligente
+## Pré-processamento inteligente
 
 Criação de filtros para limpeza e padronização de textos.
 
 Divisão dos editais em chunks (partes relevantes para análise).
 
 
-## 🤖 Extração de informações com LLMs
+## Extração de informações com LLMs
 
 Identificação de menções a ações afirmativas.
 
 Retorno estruturado em formato padronizado (ex.: JSON).
 
 
-# 📊 Objetivos
+# Objetivos
 
 Facilitar o monitoramento de políticas públicas de fomento cultural.
 
@@ -46,7 +46,7 @@ Fornecer uma base estruturada para dashboards, relatórios e análises.
 
 
 
-# 📂 Estrutura do Projeto
+# Estrutura do Projeto
 <br>    ├── data/     # PDFs e arquivos de entrada
 <br>    ├── outputs/  # Resultados processados (JSON, CSV, etc.)
 <br>    ├── src/   # Código-fonte principal
@@ -57,7 +57,7 @@ Fornecer uma base estruturada para dashboards, relatórios e análises.
 <br>    └── README.md # Este arquivo
 
 
-# ⚙️ Como usar
+# Como usar
 
 Clonar o repositório
 
