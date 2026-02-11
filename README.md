@@ -100,7 +100,8 @@ Foram utilizadas **expressões regulares (regex)** para identificar padrões tex
 
 Com base nessa técnica:
 
-- Elaborou-se um dicionário conceitual a partir de palavras-chave associadas às informações de interesse  
+- Elaborou-se um [dicionário conceitual](https://github.com/SGE-Subsecretaria-de-Gestao-Estrategica/projeto_acoes_afirmativas/blob/main/src/regex_patterns.py) – arquivo regex_patterns.py no repositório público do projeto.
+ a partir de palavras-chave associadas às informações de interesse  
 - Definiram-se padrões de busca para localizar conteúdos específicos nos editais  
 
 Esse procedimento permitiu filtrar blocos com precisão, mesmo diante de variações na redação e na estrutura dos documentos.
