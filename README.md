@@ -53,9 +53,9 @@ Fornecer uma base estruturada para dashboards, relatórios e análises.
 <br>    ├── requirements.txt # Dependências do projeto
 <br>    └── README.md # Este arquivo
 
-# Fluxo de extração e transformação dos dados
+# Fluxo de extração e tratamento dos dados
 
-O fluxo de extração e transformação dos dados adotado pela pesquisa pode ser sintetizado nas seguintes etapas:
+O processo de extração e tratamento dos dados desenvolvido na pesquisa pode ser resumido nas seguintes etapas:
 
 ## 1. Conversão de PDF para Markdown
 
