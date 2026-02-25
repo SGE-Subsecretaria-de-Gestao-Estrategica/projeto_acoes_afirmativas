@@ -17,32 +17,32 @@ A pipeline utiliza processamento de texto, pré-processamento estruturado e mode
 
 #### Leitura de PDFs
 
-Interpretação automática de editais em PDF.
+- Interpretação automática de editais em PDF.
 
-Conversão para linguagem computacional estruturada.
+- Conversão para linguagem computacional estruturada.
 
 
 #### Pré-processamento inteligente
 
-Criação de filtros para limpeza e padronização de textos.
+- Criação de filtros para limpeza e padronização de textos.
 
-Divisão dos editais em chunks (partes relevantes para análise).
+- Divisão dos editais em chunks (partes relevantes para análise).
 
 
 #### Extração de informações com LLMs
 
-Identificação de menções a ações afirmativas.
+- Identificação de menções a ações afirmativas.
 
-Retorno estruturado em formato padronizado (ex.: JSON).
+- Retorno estruturado em formato padronizado (ex.: JSON).
 
 
 ### Objetivos
 
-Facilitar o monitoramento de políticas públicas de fomento cultural.
+- Facilitar o monitoramento de políticas públicas de fomento cultural.
 
-Apoiar o Programa Nacional Aldir Blanc na análise de editais.
+- Apoiar o Programa Nacional Aldir Blanc na análise de editais.
 
-Fornecer uma base estruturada para dashboards, relatórios e análises.
+- Fornecer uma base estruturada para dashboards, relatórios e análises.
 
 
 
@@ -62,9 +62,9 @@ O processo de extração e tratamento dos dados desenvolvido na pesquisa pode se
 
 #### 1. Conversão de PDF para Markdown
 
-Inicialmente, os arquivos em PDF foram convertidos para o formato **Markdown**, um padrão textual leve e legível que preserva a hierarquia e a organização lógica do conteúdo, facilitando a análise posterior.  
+- Inicialmente, os arquivos em PDF foram convertidos para o formato **Markdown**, um padrão textual leve e legível que preserva a hierarquia e a organização lógica do conteúdo, facilitando a análise posterior.  
 
-Utilizou-se a biblioteca **Docling**, ferramenta de código aberto reconhecida por sua robustez na preservação da estrutura textual e por contar com ampla comunidade de manutenção.
+- Utilizou-se a biblioteca **Docling**, ferramenta de código aberto reconhecida por sua robustez na preservação da estrutura textual e por contar com ampla comunidade de manutenção.
 
 ---
 
