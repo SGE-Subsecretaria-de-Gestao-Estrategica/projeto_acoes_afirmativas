@@ -10,32 +10,32 @@
 
 ### 📖 Visão Geral
 
-Este projeto foi desenvolvido para interpretar, estruturar e analisar editais culturais do ciclo 1 da Política Nacional Aldir Blanc de Fomento à Cultura, transformando documentos em PDF em informações computacionais acessíveis.
+* Este projeto foi desenvolvido para interpretar, estruturar e analisar editais culturais do ciclo 1 da Política Nacional Aldir Blanc de Fomento à Cultura, transformando documentos em PDF em informações computacionais acessíveis.
 
-A pipeline utiliza processamento de texto, pré-processamento estruturado e modelos de linguagem (LLMs) para identificar e organizar dados-chave, com destaque para a detecção de ações afirmativas (cotas, vagas reservadas, critérios de inclusão etc.).
+* A pipeline utiliza processamento de texto, pré-processamento estruturado e modelos de linguagem (LLMs) para identificar e organizar dados-chave, com destaque para a detecção de ações afirmativas (cotas, vagas reservadas, critérios de inclusão etc.).
 
 
 ### 🛠️ Funcionalidades
 
 #### Leitura de PDFs
 
-Interpretação automática de editais em PDF.
+- Interpretação automática de editais em PDF.
 
-Conversão para linguagem computacional estruturada.
+- Conversão para linguagem computacional estruturada.
 
 
 #### Pré-processamento inteligente
 
-Criação de filtros para limpeza e padronização de textos.
+- Criação de filtros para limpeza e padronização de textos.
 
-Divisão dos editais em chunks (partes relevantes para análise).
+- Divisão dos editais em chunks (partes relevantes para análise).
 
 
 #### Extração de informações com LLMs
 
-Identificação de menções a ações afirmativas.
+- Identificação de menções a ações afirmativas.
 
-Retorno estruturado em formato padronizado (ex.: JSON).
+- Retorno estruturado em formato padronizado (ex.: JSON).
 
 
 ### 🎯 Objetivos
@@ -136,9 +136,10 @@ O resultado aproximado de **97%** indica alto equilíbrio entre precisão e comp
 
 #### 1. Clonar o repositório
 
+ ```
 git clone https://github.com/seu-usuario/pnab-edital-extractor.git
 cd pnab-edital-extractor
-
+ ```
 
 #### 2. Criar ambiente virtual e instalar dependências
  
