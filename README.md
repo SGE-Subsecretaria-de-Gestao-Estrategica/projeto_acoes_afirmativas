@@ -1,42 +1,44 @@
 # Ações Afirmativas na Política Nacional Aldir Blanc – Ciclo 1: Análise da Implementação nos Estados, DF e Capitais (2023–2025)
 
+
 **Acesso aos dados consolidados:** [Repositório de editais levantados na pesquisa Aldir Blanc – Ciclo 1 estados DF e capitais](https://culturagov-my.sharepoint.com/:f:/g/personal/sniic_cultura_gov_br/IgBqI1YVPorFQ7WUo--s2PxZAYnL2nC0J5n5zxgVImNCqlQ?e=Ylf756)  
 *Este repositório contém a base de dados simplificada gerada a partir do processo de extração e sistematização descrito abaixo.*
+
 
 ## Extração e sistematização de dados dos editais 
 
 
-### Visão Geral
+### 📖 Visão Geral
 
 Este projeto foi desenvolvido para interpretar, estruturar e analisar editais culturais do ciclo 1 da Política Nacional Aldir Blanc de Fomento à Cultura, transformando documentos em PDF em informações computacionais acessíveis.
 
 A pipeline utiliza processamento de texto, pré-processamento estruturado e modelos de linguagem (LLMs) para identificar e organizar dados-chave, com destaque para a detecção de ações afirmativas (cotas, vagas reservadas, critérios de inclusão etc.).
 
 
-### Funcionalidades
+### 🛠️ Funcionalidades
 
 #### Leitura de PDFs
 
-- Interpretação automática de editais em PDF.
+Interpretação automática de editais em PDF.
 
-- Conversão para linguagem computacional estruturada.
+Conversão para linguagem computacional estruturada.
 
 
 #### Pré-processamento inteligente
 
-- Criação de filtros para limpeza e padronização de textos.
+Criação de filtros para limpeza e padronização de textos.
 
-- Divisão dos editais em chunks (partes relevantes para análise).
+Divisão dos editais em chunks (partes relevantes para análise).
 
 
 #### Extração de informações com LLMs
 
-- Identificação de menções a ações afirmativas.
+Identificação de menções a ações afirmativas.
 
-- Retorno estruturado em formato padronizado (ex.: JSON).
+Retorno estruturado em formato padronizado (ex.: JSON).
 
 
-### Objetivos
+### 🎯 Objetivos
 
 - Facilitar o monitoramento de políticas públicas de fomento cultural.
 
@@ -45,8 +47,7 @@ A pipeline utiliza processamento de texto, pré-processamento estruturado e mode
 - Fornecer uma base estruturada para dashboards, relatórios e análises.
 
 
-
-### Estrutura do Projeto
+### 📂 Estrutura do Projeto
 <br>    ├── data/     # PDFs e arquivos de entrada
 <br>    ├── outputs/  # Resultados processados (JSON, CSV, etc.)
 <br>    ├── src/   # Código-fonte principal
@@ -56,7 +57,8 @@ A pipeline utiliza processamento de texto, pré-processamento estruturado e mode
 <br>    ├── requirements.txt # Dependências do projeto
 <br>    └── README.md # Este arquivo
 
-### Fluxo de extração e tratamento dos dados
+
+### 📊 Fluxo de extração e tratamento dos dados
 
 O processo de extração e tratamento dos dados desenvolvido na pesquisa pode ser resumido nas seguintes etapas:
 
@@ -130,15 +132,15 @@ Utilizou-se como métrica a **F1 Score**, definida pela combinação de:
 O resultado aproximado de **97%** indica alto equilíbrio entre precisão e completude, confirmando a eficácia do modelo, com extração consistente e incidência mínima de erros.
 
 
-### Como usar
+### 💻 Como usar
 
-Clonar o repositório
+#### 1. Clonar o repositório
 
 git clone https://github.com/seu-usuario/pnab-edital-extractor.git
 cd pnab-edital-extractor
 
 
-Criar ambiente virtual e instalar dependências
+#### 2. Criar ambiente virtual e instalar dependências
  
  ```
 python -m venv .venv
@@ -147,7 +149,7 @@ source .venv/bin/activate   # Linux/Mac
 pip install -r requirements.txt
 ```
 
-Rodar o pipeline de extração
+#### 3. Rodar o pipeline de extração
 
 ```
 python src/main.py data/exemplo_edital.pdf
@@ -158,5 +160,4 @@ python src/main.py data/exemplo_edital.pdf
 ### 📜 Licença
 
 Este projeto está sob a licença MIT.
-
 
