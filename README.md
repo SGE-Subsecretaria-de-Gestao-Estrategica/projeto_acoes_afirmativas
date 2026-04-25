@@ -1,6 +1,8 @@
 # Ações Afirmativas na Política Nacional Aldir Blanc – Ciclo 1: Análise da Implementação nos Estados, DF e Capitais (2023–2025)
 
 
+**Acesso à pesquisa completa:** [AÇÕES AFIRMATIVAS NA POLÍTICA NACIONAL ALDIR BLANC DE FOMENTO À CULTURA - Uma análise da implementação pelos Estados, DF e Capitais entre 2023 e 2025](https://drive.google.com/file/d/1ABaTJ2YhQUhWngtDE7m0XKqxxdIpD4Nk/view) 
+
 **Acesso aos dados consolidados:** [Repositório de editais levantados na pesquisa Aldir Blanc – Ciclo 1 estados DF e capitais](https://culturagov-my.sharepoint.com/:f:/g/personal/sniic_cultura_gov_br/IgBqI1YVPorFQ7WUo--s2PxZAYnL2nC0J5n5zxgVImNCqlQ?e=Ylf756)  
 *Este repositório contém a base de dados simplificada gerada a partir do processo de extração e sistematização descrito abaixo.*
 
